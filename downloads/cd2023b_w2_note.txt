@@ -1,6 +1,10 @@
 cd2023b W2
 
 1. 請各組設法啟動 pj1 在 github pages 上的網頁
+    github 倉儲與 github pages 關係?
+    https://github.com/mdecd2023/2a-pj1agx 倉儲
+    對應的網頁: https://mdecd2023.github.io/2a-pj1agx
+        將 cmsimde 作為子模組, 也可以直接將網際 cmsimde 程式當作目錄使用, 有甚麼差別?
     localhost, replit, stud?, stud2
     ssh or token?
     cmsimde based or not?
