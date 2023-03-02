@@ -1,0 +1,21 @@
+cd2023b W2
+
+1. 請各組設法啟動 pj1 在 github pages 上的網頁
+    localhost, replit, stud?, stud2
+    ssh or token?
+    cmsimde based or not?
+    can not upload .txt file into cmsimde based web site!!
+2. 請各組在網頁中整理 resume 作業製作心得
+    LaTex or Word?
+    Miktex or TeXLive?
+    How to use ChatGPT?
+3. 請各組開始執行 pj1 兩人分組專題
+    Getting started with Coppeliasim tutorial
+    What kind of Game?
+    Sensor?
+    Python remote API or Lua?
+4. 本學期 CAD 部分加入 Solid Edge, 請在分組網頁中加入 solidedge 專頁, 說明安裝與使用情形報告
+5. 本學期 CAE 部分加入 Femap, 請在分組網頁中加入 femap 專頁, 說明安裝與使用情形報告
+
+
+
