@@ -23,12 +23,81 @@
 <p>確定 server.py 與 acp 可以正確運作</p>
 <p>開始執行 <a href="https://mde.tw/pjcopsim/content/bubbleRobTutorial.html">https://mde.tw/pjcopsim/content/bubbleRobTutorial.html</a> </p>
 <h2>2apj1</h2>
-<p><a href="https://github.com/mdecd2023">https://github.com/mdecd2023</a> </p>
+<p><a href="https://github.com/mdecd2023">https://github.com/mdecd2023</a></p>
 <p>已經完成網頁建置的分組:</p>
 <p>w3 - 2023.03.10.16 已經完成分組網頁者, 可以得到分組網頁評分</p>
 <p>w3 - 請各組寫一個程式判定 2a 哪一組已經完成網頁建置.</p>
 <p>w3 開始執行 <a href="https://mde.tw/pjcopsim/content/bubbleRobTutorial.html">https://mde.tw/pjcopsim/content/bubbleRobTutorial.html</a></p>
-<p></p><h1>協同設計</h1>
+<p>星期四補課時間, 要驗收 Tutorial1 (心得, 展示頁面說明各組員所完成項目, 說明該組的專案規劃)</p>
+<p>為了以較有效率的方式驗收各分組專案與網頁內容, 需要將 2a.txt (修課學員學號與 Github 帳號對應檔案) 放入</p>
+<p><a href="https://github.com/mdecycu/studlist/tree/main/2023spring,">https://github.com/mdecycu/studlist/tree/main/2023spring,</a> 請問該用何種方式取得與維護此份資料.</p>
+<p style="padding-left: 30px;">以 Office 365 中的公開 Excel 表單讓使用者填入後, 轉檔至 2023spring/2a.txt, 之後再透過倉儲 pull requests 進行維護.</p>
+<p style="padding-left: 60px;">若有更動, 請從 <a href="https://github.com/mdecycu/studlist">https://github.com/mdecycu/studlist</a> 以 Pull Requests 進行修改)</p>
+<p style="padding-left: 30px;">請問有沒有其他更有效率的方法與流程?</p>
+<p style="padding-left: 60px;">寫一個網際程式, 以學號@nfu.edu.tw 登入 (mail2000 是否支援 oauth2?) 後填入個人的 github 帳號</p>
+<p style="padding-left: 60px;">在 office 365 建立表單, 學員以學號@nfu.edu.tw 登入後, 填入 github 帳號</p>
+<p>2a 總共會有 21 組:</p>
+<p></p>
+<script src="/static/brython.js"></script>
+<script src="/static/brython_stdlib.js"></script>
+<script>
+window.onload=function(){
+brython({debug:1, pythonpath:['/static/']});
+}
+</script>
+<p id="brython_div1"></p>
+<script type="text/python3">
+# 從 Brython 的 browser 模組導入 document 與 html 程式庫
+from browser import document, html
+
+# 利用 document 物件, 以索引 "brython_div1" 取得已經位於 html 網頁中 id="brython_div1" 的位置, 且對應到 brython_div1 變數
+brython_div1 = document["brython_div1"]
+# 可以用三個單引號或三個雙引號標註多行註解
+# 其中的 html 物件有許多建立 html 超文件內容的方法, 以下分別建立
+# BUTTON 按鈕, BR 跳行 (break), 以及 A 網站連結 (Anchor)
+# <= 是 Brython 程式語言的特殊符號, 專用於將 html 超文件資料送給網頁對應變數
+"""
+brython_div1 <= html.BUTTON("hello")
+brython_div1 <= html.BR()
+brython_div1 <= html.A("google", href="https://google.com")
+"""
+try:
+    c = document.query["c"]
+except:
+    c = "1a"
+# 將 1b.txt 資料從 Github Pages 網頁中取下
+url = "https://mde.tw/studlist/2022fall/" + c + ".txt"
+# 利用 open() 開啟網頁, 利用 read() 讀取網頁內容
+# 然後利用 split() 方法, 利用跳行符號對資料進行切割, 切割後的資料結構為 list
+# list 資料結構以 [] 區隔, 表示資料為數列, 其起始的索引值為 0
+data = open(url).read().split("\n")
+# 將每一位學員的靜態網頁共同的網路連結部分設為字串, 且與 mdecp2022 變數對應
+mdecp2022 = "https://mdecp2022.github.io/site-"
+# 因為取下的資料第一筆為標題, 而最後一筆為空字串, 可以利用 Brython 的數列索引取值範圍將索引 0 與最後一個數列值去除
+data = data[1:-1]
+# 利用 for 重複迴圈逐一取出 data 數列中的值, 然後以 \t, 也就是 tab 符號切割
+count = 0
+for i in data:
+    count += 1
+    stud = i.split("\t")
+    # 第一欄位為學號
+    stud_num = stud[0]
+    # 第二欄未為 github 帳號
+    try:
+         github_acc = stud[1]
+    except:
+        github_acc = stud_num
+    # 將靜態網頁共同連結的變數與各自的 github 帳號, 組成完整的各學員靜態網頁連結
+    site = mdecp2022 + github_acc
+    # 利用 A 物件產生連結, 然後放入 id="brython_div1 所在的網頁位置
+    link = html.A(stud_num, href=site)
+    brython_div1 <= link
+    # 每一筆資料列出後, 以 break 標註跳行
+    # 每一行列出五筆資料後, 跳行
+    brython_div1 <= " "
+    if count % 5 == 0:
+        brython_div1 <= html.BR()
+</script><h1>協同設計</h1>
 <h4>協同設計要點:</h4>
 <ol>
 <li>參與協同者能否<span style="background-color: #ffff00;">同步並發</span>執行所被交付的內容</li>
