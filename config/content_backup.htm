@@ -64,15 +64,27 @@ brython_div1 <= html.A("google", href="https://google.com")
 try:
     c = document.query["c"]
 except:
-    c = "1a"
+    c = "2a"
 # 將 1b.txt 資料從 Github Pages 網頁中取下
-url = "https://mde.tw/studlist/2022fall/" + c + ".txt"
+url = "https://mde.tw/studlist/2023spring/" + c + ".txt"
 # 利用 open() 開啟網頁, 利用 read() 讀取網頁內容
 # 然後利用 split() 方法, 利用跳行符號對資料進行切割, 切割後的資料結構為 list
 # list 資料結構以 [] 區隔, 表示資料為數列, 其起始的索引值為 0
 data = open(url).read().split("\n")
-# 將每一位學員的靜態網頁共同的網路連結部分設為字串, 且與 mdecp2022 變數對應
-mdecp2022 = "https://mdecp2022.github.io/site-"
+# 將每一位學員的靜態網頁共同的網路連結部分設為字串, 且與 mdecd2023 變數對應
+mdecd2023_2a= "https://mdecd2023.github.io/2a-pj1ag"
+repo = "https://github.com/mdecd2023/2a-pj1ag"
+grp_title = "2a-pj1ag"
+total_grp_num = 21
+for i in range(1, total_grp_num+1):
+    grp_site_url = mdecd2023_2a + str(i)
+    repo_url = repo + str(i)
+    link = html.A(grp_title+str(i), href=grp_site_url)
+    repo_link = html.A("repo", href=repo_url)
+    brython_div1 <= link
+    brython_div1 <= "(" + repo_link + ")"
+    brython_div1 <= html.BR()
+"""
 # 因為取下的資料第一筆為標題, 而最後一筆為空字串, 可以利用 Brython 的數列索引取值範圍將索引 0 與最後一個數列值去除
 data = data[1:-1]
 # 利用 for 重複迴圈逐一取出 data 數列中的值, 然後以 \t, 也就是 tab 符號切割
@@ -97,7 +109,10 @@ for i in data:
     brython_div1 <= " "
     if count % 5 == 0:
         brython_div1 <= html.BR()
-</script><h1>協同設計</h1>
+"""
+</script><h3>2aw3</h3>
+<p>2a-pj1g 分組有網站:</p>
+<p></p><h1>協同設計</h1>
 <h4>協同設計要點:</h4>
 <ol>
 <li>參與協同者能否<span style="background-color: #ffff00;">同步並發</span>執行所被交付的內容</li>
