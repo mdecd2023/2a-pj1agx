@@ -50,6 +50,13 @@ brython({debug:1, pythonpath:['/static/']});
 # 從 Brython 的 browser 模組導入 document 與 html 程式庫
 from browser import document, html
 
+def check_content(url, key_word):
+    data = open(url + "/").read()
+    if key_word in data:
+        return True
+    else:
+        return False
+
 # 利用 document 物件, 以索引 "brython_div1" 取得已經位於 html 網頁中 id="brython_div1" 的位置, 且對應到 brython_div1 變數
 brython_div1 = document["brython_div1"]
 # 可以用三個單引號或三個雙引號標註多行註解
@@ -83,6 +90,8 @@ for i in range(1, total_grp_num+1):
     repo_link = html.A("repo", href=repo_url)
     brython_div1 <= link
     brython_div1 <= "(" + repo_link + ")"
+    if check_content(grp_site_url, "vacant") == True:
+        brython_div1 <= " no web site yet"
     brython_div1 <= html.BR()
 """
 # 因為取下的資料第一筆為標題, 而最後一筆為空字串, 可以利用 Brython 的數列索引取值範圍將索引 0 與最後一個數列值去除
@@ -168,7 +177,15 @@ for i in range(1, total_grp_num+1):
         brython_div1 <= " no web site yet"
     brython_div1 <= html.BR()
 </script><h3>2bw3</h3>
-<p>2b-pj1bg1(repo)<br/>2b-pj1bg2(repo)<br/>2b-pj1bg3(repo) no web site yet<br/>2b-pj1bg4(repo)<br/>2b-pj1bg5(repo)<br/>2b-pj1bg6(repo)<br/>2b-pj1bg7(repo)<br/>2b-pj1bg8(repo) no web site yet<br/>2b-pj1bg9(repo) no web site yet<br/>2b-pj1bg10(repo)<br/>2b-pj1bg11(repo)<br/>2b-pj1bg12(repo)<br/>2b-pj1bg13(repo)<br/>2b-pj1bg14(repo) no web site yet<br/>2b-pj1bg15(repo)<br/>2b-pj1bg16(repo)<br/>2b-pj1bg17(repo)<br/>2b-pj1bg18(repo)<br/>2b-pj1bg19(repo)<br/>2b-pj1bg20(repo)<br/>2b-pj1bg21(repo)<br/>2b-pj1bg22(repo)<br/>2b-pj1bg23(repo)<br/>2b-pj1bg24(repo)<br/>2b-pj1bg25(repo)<br/>2b-pj1bg26(repo)<br/>2b-pj1bg27(repo) no web site yet<br/>2b-pj1bg28(repo) no web site yet<br/>2b-pj1bg29(repo) no web site yet<br/>2b-pj1bg30(repo) no web site yet<br/>2b-pj1bg31(repo) no web site yet</p><h1>協同設計</h1>
+<p>2b-pj1bg1(repo)<br/>2b-pj1bg2(repo)<br/>2b-pj1bg3(repo) no web site yet<br/>2b-pj1bg4(repo)<br/>2b-pj1bg5(repo)<br/>2b-pj1bg6(repo)<br/>2b-pj1bg7(repo)<br/>2b-pj1bg8(repo) no web site yet<br/>2b-pj1bg9(repo) no web site yet<br/>2b-pj1bg10(repo)<br/>2b-pj1bg11(repo)<br/>2b-pj1bg12(repo)<br/>2b-pj1bg13(repo)<br/>2b-pj1bg14(repo) no web site yet<br/>2b-pj1bg15(repo)<br/>2b-pj1bg16(repo)<br/>2b-pj1bg17(repo)<br/>2b-pj1bg18(repo)<br/>2b-pj1bg19(repo)<br/>2b-pj1bg20(repo)<br/>2b-pj1bg21(repo)<br/>2b-pj1bg22(repo)<br/>2b-pj1bg23(repo)<br/>2b-pj1bg24(repo)<br/>2b-pj1bg25(repo)<br/>2b-pj1bg26(repo)<br/>2b-pj1bg27(repo) no web site yet<br/>2b-pj1bg28(repo) no web site yet<br/>2b-pj1bg29(repo) no web site yet<br/>2b-pj1bg30(repo) no web site yet<br/>2b-pj1bg31(repo) no web site yet</p><h2>tutorial1</h2>
+<p>使用 <a href="https://nfuedu.sharepoint.com/:u:/s/cad2022/EWdB5MhlZRJKjt5UiNRebR8BN6_AmU0IX1HC7Y6dnRBzQw?e=38Kfed">CoppeliaSim 4.3.0 rev.12.7z</a> (為何不使用 4.4.0?)</p>
+<p>add a primitive sphere of diameter 0.2 to the scene with [Menu bar --&gt; Add --&gt; Primitive shape --&gt; Sphere]</p>
+<p>adjust the X-size item to 0.2</p>
+<p>The created sphere will appear in the <a href="https://mde.tw/pjcopsim/content/layerSelectionDialog.html">visibility layer</a> 1 by default, and be <a href="https://mde.tw/pjcopsim/content/designingDynamicSimulations.html#staticAndRespondable">dynamic and respondable</a> (since we kept the item Create dynamic and respondable shape enabled).</p>
+<p><em>BubbleRob's</em> body will be falling and able to react to collisions with other respondable shapes (i.e. simulated by the physics engine)</p>
+<p>start the simulation (via the toolbar button, or by pressing &lt;control-space&gt; in the scene window), and copy-and-paste the created sphere (with [Menu bar --&gt; Edit --&gt; Copy selected objects] then [Menu bar --&gt; Edit -&gt; Paste buffer], or with &lt;control-c&gt; then &lt;control-v&gt;): the two spheres will react to collision and roll away. We stop the simulation: the duplicated sphere will automatically be removed. This default behaviour can be modified in the <a href="https://mde.tw/pjcopsim/content/simulationPropertiesDialog.html">simulation dialog</a>.</p>
+<p>We also want the <em>BubbleRob's</em> body to by usable by the other calculation modules (e.g. <a href="https://mde.tw/pjcopsim/content/distanceCalculation.html">distance calculation</a>). For that reason, we enable <a href="https://mde.tw/pjcopsim/content/collidableObjects.html">Collidable</a>, <a href="https://mde.tw/pjcopsim/content/measurableObjects.html">Measurable</a> and <a href="https://mde.tw/pjcopsim/content/detectableObjects.html">Detectable</a> in the <a href="https://mde.tw/pjcopsim/content/commonPropertiesDialog.html">object common properties</a> for that shape, if not already enabled. If we wanted, we could now also change the visual appearance of our sphere in the <a href="https://mde.tw/pjcopsim/content/shapeProperties.html">shape properties</a>.</p>
+<p>Now we open the <a href="https://mde.tw/pjcopsim/content/positionDialog.html">position dialog</a> on the translation tab, select the sphere representing <em>BubbleRob's</em> body, and enter 0.02 for Along Z. We make sure that the Relative to-item is set to World. Then we click Translate selection. This translates all selected objects by 2 cm along the absolute Z-axis, and effectively lifted our sphere a little bit. In the <a href="https://mde.tw/pjcopsim/content/userInterface.html#SceneHierarchy">scene hierarchy</a>, we double-click the sphere's alias, so that we can edit it. We enter <em>bubbleRob</em> and press enter.</p><h1>協同設計</h1>
 <h4>協同設計要點:</h4>
 <ol>
 <li>參與協同者能否<span style="background-color: #ffff00;">同步並發</span>執行所被交付的內容</li>

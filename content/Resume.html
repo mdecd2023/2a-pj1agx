@@ -130,7 +130,7 @@ img.add_border {
                             <li><a href="./../blog/index.html">blog</a></li>
                         </ul>
                       </li>
-                     <li class='has-children'><a href='About.html'>About</a><ul class='dropdown'><li><a href='Github.html'>Github</a></li></ul><li><a href='Resume.html'>Resume</a><li class='has-children'><a href='pj1.html'>pj1</a><ul class='dropdown'><li class='has-children'><a href='2apj1.html'>2apj1</a><ul class='dropdown'><li><a href='2aw3.html'>2aw3</a></li></ul><li class='has-children'><a href='2bpj1.html'>2bpj1</a><ul class='dropdown'><li><a href='2bw3.html'>2bw3</a></li></li></ul></ul><li><a href='協同設計.html'>協同設計</a><li><a href='allowExt.html'>allowExt</a><li><a href='Tools.html'>Tools</a></li>
+                     <li class='has-children'><a href='About.html'>About</a><ul class='dropdown'><li><a href='Github.html'>Github</a></li></ul><li><a href='Resume.html'>Resume</a><li class='has-children'><a href='pj1.html'>pj1</a><ul class='dropdown'><li class='has-children'><a href='2apj1.html'>2apj1</a><ul class='dropdown'><li><a href='2aw3.html'>2aw3</a></li></ul><li class='has-children'><a href='2bpj1.html'>2bpj1</a><ul class='dropdown'><li><a href='2bw3.html'>2bw3</a></li></ul><li><a href='tutorial1.html'>tutorial1</a></li></ul><li><a href='協同設計.html'>協同設計</a><li><a href='allowExt.html'>allowExt</a><li><a href='Tools.html'>Tools</a></li>
                       </ul>
                 </nav>
               </div>
@@ -143,7 +143,13 @@ img.add_border {
         </header>
     <div id="tipue_search_content">Github << <a href='Github.html'>Previous</a> <a href='pj1.html'>Next</a> >> pj1<br /><h1>Resume</h1>
 <p>LaTex or Word?<br/>MikTeX or TeXLive?<br/>How to use ChatGPT?</p>
-<p>納入 Portable MiKTeX 之後的可攜 Python 程式套件: <a href="https://nfuedu-my.sharepoint.com/:u:/g/personal/yen_nfu_edu_tw/Ecr0uG0UzJlBtwpYzztBupUBkUdQsQgmd9PWzfjTZBsB8w?e=zlb42j">wcm_portable_w2-4-miktex.7z</a></p><br />Github << <a href='Github.html'>Previous</a> <a href='pj1.html'>Next</a> >> pj1</div>
+<p>納入 Portable MiKTeX 之後的可攜 Python 程式套件: <a href="https://nfuedu-my.sharepoint.com/:u:/g/personal/yen_nfu_edu_tw/Ecr0uG0UzJlBtwpYzztBupUBkUdQsQgmd9PWzfjTZBsB8w?e=zlb42j">wcm_portable_w2-4-miktex.7z</a></p>
+<p>在 start_ipv6.bat 中加入:</p>
+<p style="padding-left: 30px;">set path_miktex=%Disk%:\\miktex-portable\texmfs\install\miktex\bin\x64;</p>
+<p>並將 path_miktex 變數納入操作系統的搜尋目錄:</p>
+<p style="padding-left: 30px;">path=%Disk%:;%path_python%;%path_git%;%path_tcc%;%path_gnuplot%;%path_scite%;%path_miktex%;%path%;</p>
+<p>就可以利用可攜 MiKTeX 編譯英文版的 .tex, 也就是 Resume 倉儲中 result 目錄中的 Resume.tex:</p>
+<p style="padding-left: 30px;">pdflatex -interaction=nonstopmode Resume.tex</p><br />Github << <a href='Github.html'>Previous</a> <a href='pj1.html'>Next</a> >> pj1</div>
         
     <!-- footer -->
       <div class="container">
