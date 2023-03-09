@@ -140,31 +140,19 @@ brython({debug:1, pythonpath:['/static/']});
 </script>
 <p id="brython_div1"></p>
 <script type="text/python3">
-# 從 Brython 的 browser 模組導入 document 與 html 程式庫
 from browser import document, html
 
-# 利用 document 物件, 以索引 "brython_div1" 取得已經位於 html 網頁中 id="brython_div1" 的位置, 且對應到 brython_div1 變數
+def check_content(url, key_word):
+    data = open(url + "/").read()
+    if key_word in data:
+        return True
+    else:
+        return False
+
 brython_div1 = document["brython_div1"]
-# 可以用三個單引號或三個雙引號標註多行註解
-# 其中的 html 物件有許多建立 html 超文件內容的方法, 以下分別建立
-# BUTTON 按鈕, BR 跳行 (break), 以及 A 網站連結 (Anchor)
-# <= 是 Brython 程式語言的特殊符號, 專用於將 html 超文件資料送給網頁對應變數
-"""
-brython_div1 <= html.BUTTON("hello")
-brython_div1 <= html.BR()
-brython_div1 <= html.A("google", href="https://google.com")
-"""
-try:
-    c = document.query["c"]
-except:
-    c = "2b"
-# 將 1b.txt 資料從 Github Pages 網頁中取下
+c = "2b"
 url = "https://mde.tw/studlist/2023spring/" + c + ".txt"
-# 利用 open() 開啟網頁, 利用 read() 讀取網頁內容
-# 然後利用 split() 方法, 利用跳行符號對資料進行切割, 切割後的資料結構為 list
-# list 資料結構以 [] 區隔, 表示資料為數列, 其起始的索引值為 0
 data = open(url).read().split("\n")
-# 將每一位學員的靜態網頁共同的網路連結部分設為字串, 且與 mdecd2023 變數對應
 mdecd2023_2b= "https://mdecd2023.github.io/2b-pj1bg"
 repo = "https://github.com/mdecd2023/2b-pj1bg"
 grp_title = "2b-pj1bg"
@@ -176,6 +164,8 @@ for i in range(1, total_grp_num+1):
     repo_link = html.A("repo", href=repo_url)
     brython_div1 <= link
     brython_div1 <= "(" + repo_link + ")"
+    if check_content(grp_site_url, "vacant") == True:
+        brython_div1 <= " no web site yet"
     brython_div1 <= html.BR()
 </script><h1>協同設計</h1>
 <h4>協同設計要點:</h4>
