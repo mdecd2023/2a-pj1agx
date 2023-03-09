@@ -142,6 +142,7 @@ img.add_border {
           
         </header>
     <div id="tipue_search_content">Github << <a href='Github.html'>Previous</a> <a href='pj1.html'>Next</a> >> pj1<br /><h1>Resume</h1>
+<p>假如可以將目前轉換英文的 template 改為中文也適用, 則 w3 可以加分.</p>
 <p>LaTex or Word?<br/>MikTeX or TeXLive?<br/>How to use ChatGPT?</p>
 <p>納入 Portable MiKTeX 之後的可攜 Python 程式套件: <a href="https://nfuedu-my.sharepoint.com/:u:/g/personal/yen_nfu_edu_tw/Ecr0uG0UzJlBtwpYzztBupUBkUdQsQgmd9PWzfjTZBsB8w?e=zlb42j">wcm_portable_w2-4-miktex.7z</a></p>
 <p>在 start_ipv6.bat 中加入:</p>
@@ -149,7 +150,67 @@ img.add_border {
 <p>並將 path_miktex 變數納入操作系統的搜尋目錄:</p>
 <p style="padding-left: 30px;">path=%Disk%:;%path_python%;%path_git%;%path_tcc%;%path_gnuplot%;%path_scite%;%path_miktex%;%path%;</p>
 <p>就可以利用可攜 MiKTeX 編譯英文版的 .tex, 也就是 Resume 倉儲中 result 目錄中的 Resume.tex:</p>
-<p style="padding-left: 30px;">pdflatex -interaction=nonstopmode Resume.tex</p><br />Github << <a href='Github.html'>Previous</a> <a href='pj1.html'>Next</a> >> pj1</div>
+<p style="padding-left: 30px;">pdflatex -interaction=nonstopmode Resume.tex</p>
+<p>假如希望透過 Github Actions 處理 .tex 檔案轉為 pdf 並 release, 可以參考下列命令:</p>
+<pre class="brush:js;auto-links:false;toolbar:false" contenteditable="false"># Controls when the action will run. 
+on:
+  # Triggers the workflow on push or pull request events but only for the main branch
+  push:
+    branches: [ pdf ]
+  pull_request:
+    branches: [ pdf ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install texlive and related fonts
+        run:
+          # using xetex engine to compile LaTeX macro based .tex files
+          sudo apt install -y texlive texlive-xetex texlive-lang-chinese gsfonts fonts-moe-standard-kai ttf-mscorefonts-installer librsvg2-bin texlive-fonts-extra 
+      - name: Test LaTeX
+        working-directory: ./LaTeX報告
+        run: |
+          xelatex 4082pj1.tex
+          xelatex 4082pj1.tex
+          xelatex 4082pj1.tex
+
+      - name: Bump version and push tag
+        id: tag_version
+        uses: mathieudutour/github-tag-action@v5.5
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ steps.tag_version.outputs.new_tag }}
+          release_name: Release ${{ steps.tag_version.outputs.new_tag }}
+          draft: false
+          prerelease: false
+
+      - name: Upload Release Asset
+        id: upload-release-asset 
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }} 
+          asset_path: ./LaTeX報告/4082pj1.pdf
+          asset_name: 4082pj1.pdf
+          asset_content_type: pdf
+</pre>
+<p></p><br />Github << <a href='Github.html'>Previous</a> <a href='pj1.html'>Next</a> >> pj1</div>
         
     <!-- footer -->
       <div class="container">
