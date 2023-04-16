@@ -17,8 +17,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3.5.2
-      - name: Install texlive and related fonts
-        run:
+      - name: Update and Install texlive and related fonts
+        run: |
           sudo apt update
           sudo apt install -y texlive texlive-xetex texlive-lang-chinese gsfonts fonts-moe-standard-kai ttf-mscorefonts-installer librsvg2-bin texlive-fonts-extra 
       - name: Test LaTeX
