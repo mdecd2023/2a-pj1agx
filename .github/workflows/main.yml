@@ -19,7 +19,7 @@ jobs:
       - uses: actions/checkout@v3.5.2
       - name: Install texlive and related fonts
         run:
-          sudo apt install -y texlive texlive-xetex texlive-lang-chinese gsfonts fonts-moe-standard-kai ttf-mscorefonts-installer librsvg2-bin texlive-fonts-extra 
+          sudo apt install -y --fix-missing texlive texlive-xetex texlive-lang-chinese gsfonts fonts-moe-standard-kai ttf-mscorefonts-installer librsvg2-bin texlive-fonts-extra 
       - name: Test LaTeX
         working-directory: ./latex
         run: |
